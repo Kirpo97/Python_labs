@@ -1,3 +1,4 @@
+<img src="./.img/Python_logo.png" height="32"/></h1>
 # Лабараторные работы Python
 1) Основы Python
 2) Оформление кода
