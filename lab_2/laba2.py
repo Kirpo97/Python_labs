@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 if __name__ == '__main__':
-    
     import pandas as pd
     import matplotlib.pyplot as plt
     # Для загрузки данных используем библиотеку yfinance
