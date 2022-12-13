@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Chart.js Example</title>
+    <!-- import plugin script -->
+    <script src='static/Chart.min.js'></script>
+  </head>
+  <body>
+    <h2>Итоговая работа "Анализ данных времянных рядов акций"</h2>
+    <!-- bar chart canvas element -->
+    <form>
+      <p>Модель <select name="model">
+       <option value="s1">Авторегрессионная модель (AR)</option>
+       <option value="s2">Скользящее среднее (MA)</option>
+       <option value="s3">Метод скользящего среднего с авторегрессией и интегрированием (ARIMA)</option>
+      </select></p>
+      <p>Компания <select name="company">
+        <option value="s1">Роснефть (ROSN)</option>
+        <option value="s2">Газпром (GAZP)</option>
+        <option value="s3">Яндекс (YNDX)</option>
+        <option value="s4">Adobe (ADB)</option>
+       </select></p>
+      <p>В период с <input type="date" size="40"> 
+       по <input type="date" size="40"></p>
+      <p><input type="submit" value="Обучить"></p>
+      <p><progress max="100" value="0">
+        Загружено на <span id="value">25</span>%
+      </progress></p>
+     </form> 
+    <canvas id="myChart" width="600" height="400"></canvas>
+
+    <script>
+      // Global parameters:
+      // do not resize the chart canvas when its container does (keep at 600x400px)
+      Chart.defaults.global.responsive = false;
+
+      // define the chart data
+      var chartData = {
+        labels : [{% for item in labels %}
+                   "{{item}}",
+                  {% endfor %}],
+        datasets : [{
+            label: '{{ legend }}',
+            fill: true,
+            lineTension: 0.1,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data : [{% for item in values %}
+                      {{item}},
+                    {% endfor %}],
+            spanGaps: false
+        }]
+      }
+
+      // get chart canvas
+      var ctx = document.getElementById("myChart").getContext("2d");
+
+      // create the chart using the chart canvas
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+      });
+    </script>
+
+  </body>
+</html>
