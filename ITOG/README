@@ -2,3 +2,4 @@
 
 Реализован front-end, базовый Web-interface
 Реализован back-end, обучение, прогноз
+Проведён анализ временного ряда ".\web_app\venv\test.ipynb"
