@@ -13,4 +13,4 @@ class Ticers():
         data = pd.DataFrame(columns=tickers_dict)  
         data[company] = yf.download(tickers_dict[company], data1, data2)['Adj Close']
         data.to_csv('./data/company/' + company + '.csv')
-   
+        return data
